@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="1">
+
+        <!--  Sequences for patient  -->
+        <record id="patient_patient_sequence" model="ir.sequence">
+            <field name="name">patient system</field>
+            <field name="code">patient.patient</field>
+            <field name="prefix">PR</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

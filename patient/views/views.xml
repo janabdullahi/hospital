@@ -8,6 +8,7 @@
       <field name="type">list</field>
       <field name="arch" type="xml">
         <list>
+          <field name="patient_ref_No" string="Ref No."/>
           <field name="name"/>
           <field name="last_name"/>
           <field name="dob" widget="badge"/>
@@ -24,6 +25,10 @@
         <field name="arch" type="xml">
           <form>
             <sheet>
+              <div class="text-muted">Patient Reference</div>
+              <h2>
+                <field name="patient_ref_No" readonly="1"/>
+              </h2>
               <group>
                 <field name="name"/>
                 <field name="middle_name"/>
