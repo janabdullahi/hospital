@@ -37,7 +37,8 @@ class patient(models.Model):
     private_country_id = fields.Many2one("res.country", string="Private Country")
     private_phone = fields.Char(string="Private Phone")
     private_email = fields.Char(string="Private Email")
-    
+    emergency_contact = fields.Char("Contact Name")
+    emergency_phone = fields.Char("Contact Phone")
 
     @api.model_create_multi
     def create(self, vals_list):
