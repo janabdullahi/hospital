@@ -59,11 +59,13 @@
                         <field name="private_country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
                       </div>
                   </group>
+                  <group string="Emergency Contact" name="emergency">
+                    <field name="emergency_contact"/>
+                    <field name="emergency_phone" class="o_force_ltr"/>
+                  </group>
                 </group>
               </page>
             </notebook>
-
-
             </sheet>
           </form>
         </field>
