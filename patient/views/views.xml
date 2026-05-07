@@ -65,6 +65,21 @@
                   </group>
                 </group>
               </page>
+              <page name="medical_information" string="Medical Information">
+                <group>
+                  <group string="Medical History" name="medical">
+                      <field name="medical_history"/>
+                      <field name="family_medical_history"/>
+                      <field name="current_medication"/>
+                  </group>
+                  <group string="Vitals" name="vital">
+                      <field name="allergies"/>
+                      <field name="blood_group"/>
+                      <field name="height"/>
+                      <field name="weight"/>
+                  </group>
+                </group>
+              </page>
             </notebook>
             </sheet>
           </form>

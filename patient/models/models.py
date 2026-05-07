@@ -11,7 +11,7 @@ class patient(models.Model):
     name = fields.Char()
     middle_name = fields.Char()
     last_name = fields.Char()
-    dob = fields.Date(string="Date of birth", default=fields.Date.context_today, required=True)
+    dob = fields.Date(string="Date of Birth", default=fields.Date.context_today, required=True)
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female'),
@@ -39,7 +39,30 @@ class patient(models.Model):
     private_email = fields.Char(string="Private Email")
     emergency_contact = fields.Char("Contact Name")
     emergency_phone = fields.Char("Contact Phone")
-
+    medical_history = fields.Html("Mdeical History")
+    family_medical_history = fields.Html("Family Mdeical History")
+    current_medication = fields.Selection([
+        ('yes', 'Yes'),
+        ('no', 'No'),
+        ], string="Current Medication", default="no")
+    allergies = fields.Selection([
+        ('yes', 'Yes'),
+        ('no', 'No'),
+        ], string="Allergies" , default="no")
+    blood_group = fields.Selection([
+        ('a+', 'A+'),
+        ('a-', 'A-'),
+        ('b+', 'B+'),
+        ('b-', 'B-'),
+        ('ab+', 'AB+'),
+        ('ab-', 'AB-'),
+        ('o+', 'O+'),
+        ('o-', 'O-'),
+        ('unspecified', 'Unspecified'),
+        ], string="Blood Group" , default="unspecified")
+    height = fields.Integer('Height(cm)')
+    weight = fields.Integer('Weight')
+    
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
