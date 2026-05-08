@@ -12,6 +12,10 @@ class patient(models.Model):
     middle_name = fields.Char()
     last_name = fields.Char()
     dob = fields.Date(string="Date of Birth", default=fields.Date.context_today, required=True)
+    place_of_birth = fields.Char('Place of Birth')
+    country_of_birth = fields.Many2one("res.country", string="Country of Birth")
+    nhs_number = fields.Integer("NHS Number")
+    mrn_number = fields.Integer("MRN Number")
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female'),
