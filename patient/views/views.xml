@@ -79,8 +79,18 @@
                   <group string="Vitals" name="vital">
                       <field name="allergies"/>
                       <field name="blood_group"/>
-                      <field name="height"/>
-                      <field name="weight"/>
+                      
+                      <label for="height"/>
+                      <div name="hieght_cm_feet" class="o_row">
+                          <field name="height"/>
+                          <field name="cm_or_feet"/>
+                      </div>
+                      <label for="weight"/>
+                      <div name="kg_or_lbs" class="o_row">
+                          <field name="weight"/>
+                          <field name="kg_or_lbs"/>
+                      </div>
+                      
                   </group>
                 </group>
               </page>

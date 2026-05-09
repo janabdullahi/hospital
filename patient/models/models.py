@@ -65,8 +65,16 @@ class patient(models.Model):
         ('o-', 'O-'),
         ('unspecified', 'Unspecified'),
         ], string="Blood Group" , default="unspecified", required=True)
-    height = fields.Integer('Height(cm)')
-    weight = fields.Integer('Weight')
+    height = fields.Float('Height')
+    cm_or_feet = fields.Selection([
+        ('cm', 'Cm'),
+        ('feet', 'Feet'),
+        ], string="Cm / Feet" , default="cm")
+    weight = fields.Float('Weight')
+    kg_or_lbs = fields.Selection([
+        ('kg', 'Kg'),
+        ('lbs', 'lbs'),
+        ], string="Kg / lbs" , default="kg")
     
     @api.model_create_multi
     def create(self, vals_list):
