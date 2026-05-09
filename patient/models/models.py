@@ -6,6 +6,7 @@ from odoo import models, fields, api, _
 class patient(models.Model):
     _name = 'patient.patient'
     _description = 'patient.patient'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     patient_ref_No = fields.Char("Request Number", default='New', copy=False)
     name = fields.Char()
