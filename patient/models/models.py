@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class patient(models.Model):
@@ -82,3 +83,10 @@ class patient(models.Model):
             if vals.get('patient_ref_No', 'New') == 'New':
                 vals['patient_ref_No'] = self.env['ir.sequence'].next_by_code('patient.patient') or 'New'
         return super().create(vals_list)
+    
+    @api.constrains('nhs_number')
+    def _check_nhs_number(self):
+        for rec in self:
+            if rec.nhs_number:
+                if not rec.nhs_number.isdigit() or len(rec.nhs_number) != 10:
+                    raise ValidationError("NHS Number must be exactly 10 digits.")
