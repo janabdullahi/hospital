@@ -12,6 +12,7 @@
           <field name="name"/>
           <field name="last_name"/>
           <field name="dob" widget="badge"/>
+          <field name="nhs_number"/>
         </list>
       </field>
     </record>
