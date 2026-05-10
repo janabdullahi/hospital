@@ -89,5 +89,13 @@ class patient(models.Model):
     def _check_nhs_number(self):
         for rec in self:
             if rec.nhs_number:
+                # format check
                 if not rec.nhs_number.isdigit() or len(rec.nhs_number) != 10:
                     raise ValidationError("NHS Number must be exactly 10 digits.")
+                # duplicate check
+            duplicate = self.search([
+                ('nhs_number', '=', rec.nhs_number),
+                ('id', '!=', rec.id)
+            ])
+            if duplicate:
+                raise ValidationError("A patient already exists with this NHS number.")
