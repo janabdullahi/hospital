@@ -10,6 +10,7 @@ class patient(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     patient_ref_No = fields.Char("Request Number", default='New', copy=False)
+    image_1920 = fields.Image(string="Profile Picture")
     name = fields.Char(required=True)
     middle_name = fields.Char()
     last_name = fields.Char(required=True)

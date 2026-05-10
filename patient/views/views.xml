@@ -1,6 +1,23 @@
 <odoo>
   <data>
 
+    <!-- explicit search view definition -->
+    <record id="patient_search_view" model="ir.ui.view">
+      <field name="name">patient.search.view</field>
+      <field name="model">patient.patient</field>
+      <field name="type">search</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="patient_ref_No" string="Ref No."/>
+          <field name="name"/>
+          <field name="last_name"/>
+          <field name="nhs_number"/>
+          <field name="dob"/>
+        </search>
+      </field>
+    </record>
+
+
     <!-- explicit list view definition -->
     <record model="ir.ui.view" id="patient.list">
       <field name="name">patient list</field>
@@ -26,6 +43,7 @@
         <field name="arch" type="xml">
           <form>
             <sheet>            
+              <field name="image_1920" widget="image" class="oe_avatar"/>
               <div class="text-muted">Patient Reference</div>
               <h2>
                 <field name="patient_ref_No" readonly="1"/>
