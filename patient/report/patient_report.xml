@@ -1,0 +1,38 @@
+<odoo>
+
+    <!-- Report Action -->
+    <record id="patient_report" model="ir.actions.report">
+        <field name="name">Patient Report</field>
+        <field name="model">patient.patient</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">patient.patient_report_template</field>
+        <field name="binding_model_id" ref="model_patient_patient"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Template -->
+    <template id="patient_report_template">
+
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    
+                    <div class="report_page">
+                        <h2 class="report_title">Patient Report</h2>
+                        <p>
+                            Name:
+                            <span t-field="doc.name"/>
+                        </p>
+                        <p>
+                            NHS Number:
+                            <span t-field="doc.nhs_number"/>
+                        </p>
+                    </div>
+
+                </t>
+            </t>
+        </t>
+
+    </template>
+
+</odoo>
