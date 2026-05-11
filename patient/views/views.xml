@@ -18,6 +18,44 @@
     </record>
 
 
+    <!-- explicit kanabn view definition -->
+    <record id="patient_kanban_view" model="ir.ui.view">
+      <field name="name">patient.kanban.view</field>
+      <field name="model">patient.patient</field>
+      <field name="type">kanban</field>
+      <field name="arch" type="xml">
+        <kanban sample="1">
+          <field name="name"/>
+          <field name="last_name"/>
+          <field name="dob"/>
+          <field name="nhs_number"/>
+          <templates>
+              <t t-name="card">
+                <div class="oe_kanban_global_click">
+                  <div class="d-flex gap-1">
+                    <b>Name:</b><field name="name"/>
+                    <field name="last_name"/>
+                  </div>
+                  <div>
+                    <b>DOB:</b> <field name="dob"/>
+                  </div>
+                  <div>
+                    <b>NHS:</b> <field name="nhs_number"/>
+                  </div>
+                  <div>
+                    <b>Phone:</b> <field name="private_phone"/>
+                  </div>
+                  <div>
+                    <b>Email:</b> <field name="private_email"/>
+                  </div>
+                </div>
+              </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+
     <!-- explicit list view definition -->
     <record model="ir.ui.view" id="patient.list">
       <field name="name">patient list</field>
@@ -70,8 +108,8 @@
               <page name="personal_information" string="Contact Information">
                 <group>
                   <group string="Private Contact">
-                        <field name="private_phone"/>
-                        <field name="private_email"/>
+                    <field name="private_phone"/>
+                    <field name="private_email"/>
                     <label for="private_street" string="Private Address"/>
                       <div class="o_address_format">
                         <field name="private_street" placeholder="Street..." class="o_address_street"/>
@@ -91,25 +129,23 @@
               <page name="medical_information" string="Medical Information">
                 <group>
                   <group string="Medical History" name="medical">
-                      <field name="medical_history"/>
-                      <field name="family_medical_history"/>
-                      <field name="current_medication"/>
+                    <field name="medical_history"/>
+                    <field name="family_medical_history"/>
+                    <field name="current_medication"/>
                   </group>
                   <group string="Vitals" name="vital">
-                      <field name="allergies"/>
-                      <field name="blood_group"/>
-                      
-                      <label for="height"/>
-                      <div name="hieght_cm_feet" class="o_row">
-                          <field name="height"/>
-                          <field name="cm_or_feet"/>
-                      </div>
-                      <label for="weight"/>
-                      <div name="kg_or_lbs" class="o_row">
-                          <field name="weight"/>
-                          <field name="kg_or_lbs"/>
-                      </div>
-                      
+                    <field name="allergies"/>
+                    <field name="blood_group"/>
+                    <label for="height"/>
+                    <div name="hieght_cm_feet" class="o_row">
+                      <field name="height"/>
+                      <field name="cm_or_feet"/>
+                    </div>
+                    <label for="weight"/>
+                    <div name="kg_or_lbs" class="o_row">
+                      <field name="weight"/>
+                      <field name="kg_or_lbs"/>
+                    </div>
                   </group>
                 </group>
               </page>
@@ -125,7 +161,7 @@
     <record model="ir.actions.act_window" id="patient.action_window">
       <field name="name">Patient</field>
       <field name="res_model">patient.patient</field>
-      <field name="view_mode">list,form</field>
+      <field name="view_mode">kanban,list,form</field>
     </record>
 
 
