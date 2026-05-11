@@ -12,27 +12,84 @@
 
     <!-- Template -->
     <template id="patient_report_template">
-
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.external_layout">
-                    
-                    <div class="report_page">
-                        <h2 class="report_title">Patient Report</h2>
-                        <p>
-                            Name:
-                            <span t-field="doc.name"/>
-                        </p>
-                        <p>
-                            NHS Number:
-                            <span t-field="doc.nhs_number"/>
-                        </p>
+                    <div class="report_page" width="100%">
+                        <div>
+                            <h1 class="report_title">
+                                Patient Report
+                            </h1>
+                        </div>
+                        <div class="address">
+                            <span t-esc="doc.private_street or '&#160;'"/>
+                            <span t-esc="doc.private_street2 or '&#160;'"/>
+                            <span t-esc="doc.private_city or '&#160;'"/>
+                            <span t-esc="doc.private_state_id.name if doc.private_state_id else '&#160;'"/>
+                            <span t-esc="doc.private_zip or '&#160;'"/>
+                            <span t-esc="doc.private_country_id.name if doc.private_country_id else '&#160;'"/>
+                        </div>
+                        <div class="nhs_ref">
+                            <div class="nhs">
+                                NHS No. 
+                                <span t-field="doc.nhs_number"/>
+							</div>
+                            <div class="reference">
+                                Patient Ref: 
+                                <span t-field="doc.patient_ref_No"/>
+                            </div>
+                        </div>
+                        <table class="table table-bordered" width="100%">
+                            <tr>
+                                <td class="titles"> Name </td>
+                                <td class="values">
+                                    <span t-esc="doc.name"/>
+                                </td>
+                                <td class="titles"> Last Name </td>
+                                <td class="values">
+                                    <span t-esc="doc.last_name"/>
+                                </td>
+                            </tr>
+                            <tr>    
+                                <td class="titles"> Place of Birth </td>
+                                <td class="values">
+                                    <span t-esc="doc.place_of_birth"/>
+                                </td>
+                                <td class="titles"> Country of Birth </td>
+                                <td class="values">
+                                    <span t-field="doc.country_of_birth"/>
+                                </td>
+                            </tr>
+                            <tr>    
+                                <td class="titles"> Phone </td>
+                                <td class="values">
+                                    <span t-esc="doc.private_phone"/>
+                                </td>
+                                <td class="titles"> Email </td>
+                                <td class="values">
+                                    <span t-esc="doc.private_email"/>
+                                </td>
+                            </tr>
+                            <tr>    
+                                <td class="titles"> Allergies </td>
+                                <td class="values">
+                                    <span t-field="doc.allergies"/>
+                                </td>
+                                <td class="titles"> Blood Group </td>
+                                <td class="values">
+                                    <span t-esc="doc.blood_group"/>
+                                </td>
+                            </tr>
+                            <tr>    
+                                <td class="titles"> Height </td>
+                                <td class="values" t-esc="'%s %s' % (doc.height, doc.cm_or_feet)"/>
+                                <td class="titles"> Weight </td>
+                                <td class="values" t-esc="'%s %s' % (doc.weight, doc.kg_or_lbs)"/>
+                            </tr>
+                        </table>
                     </div>
-
                 </t>
             </t>
         </t>
-
     </template>
-
 </odoo>
