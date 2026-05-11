@@ -99,7 +99,3 @@ class patient(models.Model):
             ])
             if duplicate:
                 raise ValidationError("A patient already exists with this NHS number.")
-                
-# report
-# kanban view(pic)
-# user access

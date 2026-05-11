@@ -47,6 +47,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'report/patient_report.xml',
         'data/ir_sequence_data.xml',
         'views/views.xml',
     ],
