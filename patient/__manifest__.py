@@ -51,5 +51,11 @@
         'data/ir_sequence_data.xml',
         'views/views.xml',
     ],
+
+    'assets': {
+    'web.report_assets_common': [
+        'patient/static/src/css/patient_report_design.css',
+    ],
+}
 }
 
