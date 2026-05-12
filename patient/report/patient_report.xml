@@ -87,6 +87,7 @@
                                 <td class="values" t-esc="'%s %s' % (doc.weight, doc.kg_or_lbs)"/>
                             </tr>
                         </table>
+                        <div style="page-break-after: always;"></div>
                     </div>
                 </t>
             </t>

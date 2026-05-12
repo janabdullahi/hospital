@@ -31,7 +31,7 @@
           <field name="nhs_number"/>
           <templates>
               <t t-name="card">
-                <div class="oe_kanban_global_click">
+                <div class="text-truncate oe_kanban_global_click" width="100%">
                   <div class="d-flex gap-1">
                     <b>Name:</b><field name="name"/>
                     <field name="last_name"/>
@@ -40,7 +40,7 @@
                     <b>DOB:</b> <field name="dob"/>
                   </div>
                   <div>
-                    <b>NHS:</b> <field name="nhs_number"/>
+                    <b>NHS No:</b> <field name="nhs_number"/>
                   </div>
                   <div>
                     <b>Phone:</b> <field name="private_phone"/>
