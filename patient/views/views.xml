@@ -32,22 +32,31 @@
           <templates>
               <t t-name="card">
                 <div class="text-truncate oe_kanban_global_click" width="100%">
-                  <div class="d-flex gap-1">
-                    <b>Name:</b><field name="name"/>
-                    <field name="last_name"/>
-                  </div>
-                  <div>
-                    <b>DOB:</b> <field name="dob"/>
-                  </div>
-                  <div>
-                    <b>NHS No:</b> <field name="nhs_number"/>
-                  </div>
-                  <div>
-                    <b>Phone:</b> <field name="private_phone"/>
-                  </div>
-                  <div>
-                    <b>Email:</b> <field name="private_email"/>
-                  </div>
+                  <table>
+                    <tr>
+                      <td><strong>Name:</strong></td>
+                      <td style="display:flex; gap:5px;">
+                        <field name="name"/>
+                        <field name="last_name"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>DOB:</strong></td> 
+                      <td><field name="dob"/></td>
+                    </tr>
+                    <tr>
+                      <td><strong>NHS:</strong></td> 
+                      <td><field name="nhs_number"/></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Phone:</strong></td> 
+                      <td><field name="private_phone"/></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Email:</strong></td>
+                      <td><field name="private_email"/></td>
+                    </tr>
+                  </table>
                 </div>
               </t>
           </templates>
