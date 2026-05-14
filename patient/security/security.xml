@@ -1,0 +1,39 @@
+<odoo>
+       
+        <!-- Patient Category -->
+        <record model="ir.module.category" id="patient_request_category">
+            <field name="name">Patient Request</field>
+        </record>
+
+        <!-- Patient Group -->
+        <record model="res.groups" id="patient_request_group">
+            <field name="name">User</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="patient_request_category"/>
+        </record>
+
+        <!-- Admin Group -->
+        <record model="res.groups" id="admin_patient_request_group">
+            <field name="name">Administrator</field>
+            <field name="implied_ids" eval="[(4, ref('patient_request_group'))]"/>
+            <field name="category_id" ref="patient_request_category"/>
+        </record>
+
+
+        <!-- Patient Rule -->
+        <record id="patient_rule" model="ir.rule">
+            <field name="name">Patient Can see own request</field>
+            <field name="model_id" ref="model_patient_patient"/>
+            <field name="groups" eval="[(4, ref('patient_request_group'))]"/>
+            <field name="domain_force">[('user_id' ,'=', user.id)]</field>
+        </record>
+
+        <!-- Admin Rule -->
+        <record id="admin_rule" model="ir.rule">
+            <field name="name">Admin Can see all Patient request</field>
+            <field name="model_id" ref="model_patient_patient"/>
+            <field name="groups" eval="[(4, ref('admin_patient_request_group'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+</odoo>
