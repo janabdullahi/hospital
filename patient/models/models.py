@@ -100,7 +100,7 @@ class patient(models.Model):
                 'mimetype': 'application/pdf',
             })
 
-            # Create Email
+            # Create Emaill
             mail = self.env['mail.mail'].create({
                 'subject': 'Patient Report',
                 'body_html': f'''
