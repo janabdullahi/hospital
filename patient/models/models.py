@@ -2,7 +2,7 @@
 
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-
+import base64
 
 class patient(models.Model):
     _name = 'patient.patient'
@@ -79,6 +79,42 @@ class patient(models.Model):
         ('lbs', 'lbs'),
         ], string="Kg / lbs" , default="kg")
     
+
+    def send_email(self):
+        for rec in self:
+            # Get Report
+            self.env['ir.actions.report'].search([
+                ('report_name', '=', 'patient.patient_report_template')
+            ], limit=1)
+
+            # Generate PDF
+            pdf, _ = self.env['ir.actions.report']._render_qweb_pdf(
+                   'patient.patient_report',[rec.id]
+            )
+
+            # Create Attachment
+            attachment = self.env['ir.attachment'].create({
+                'name': f'{rec.name}.pdf',
+                'type': 'binary',
+                'datas': base64.b64encode(pdf),
+                'mimetype': 'application/pdf',
+            })
+
+            # Create Emaill
+            mail = self.env['mail.mail'].create({
+                'subject': 'Patient Report',
+                'body_html': f'''
+                    <p>Hello {rec.name},</p>
+                    <p>Your patient report is attached.</p>
+                ''',
+                'email_to': rec.private_email,
+                'attachment_ids': [(4, attachment.id)],
+            })
+
+            # Send Email
+            mail.send()
+            
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
