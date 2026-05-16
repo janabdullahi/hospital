@@ -89,11 +89,9 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
           <form>
-            
             <header>
-              <button name="send_email" string="Send Report" type="object"/>
+              <button name="send_email" string="Send Report" type="object" class="btn-primary"/>
             </header>
-            
             <sheet>            
               <field name="image_1920" widget="image" class="oe_avatar"/>
               <div class="text-muted">Patient Reference</div>
