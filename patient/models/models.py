@@ -8,6 +8,7 @@ class patient(models.Model):
     _name = 'patient.patient'
     _description = 'patient.patient'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _order = 'patient_ref_No desc'
 
     patient_ref_No = fields.Char("Request Number", default='New', copy=False)
     image_1920 = fields.Image(string="Profile Picture")
@@ -86,12 +87,10 @@ class patient(models.Model):
             self.env['ir.actions.report'].search([
                 ('report_name', '=', 'patient.patient_report_template')
             ], limit=1)
-
             # Generate PDF
             pdf, _ = self.env['ir.actions.report']._render_qweb_pdf(
                    'patient.patient_report',[rec.id]
             )
-
             # Create Attachment
             attachment = self.env['ir.attachment'].create({
                 'name': f'{rec.name}.pdf',
@@ -99,18 +98,27 @@ class patient(models.Model):
                 'datas': base64.b64encode(pdf),
                 'mimetype': 'application/pdf',
             })
-
             # Create Emaill
             mail = self.env['mail.mail'].create({
                 'subject': 'Patient Report',
                 'body_html': f'''
-                    <p>Hello {rec.name},</p>
-                    <p>Your patient report is attached.</p>
+                    <div style="font-family: Arial, sans-serif; font-size:14px;">
+                        Hello {rec.name} {rec.last_name}
+                        <br/><br/>
+                        Please find attached your patient report for your records.
+                        <br/><br/>
+                        If you have any questions or need further assistance,
+                        please contact the hospital administration.
+                        <br/><br/>
+                        Kind regards,
+                        <br/></br>
+                        Hospital management
+                        <br/>
+                    </div>
                 ''',
                 'email_to': rec.private_email,
                 'attachment_ids': [(4, attachment.id)],
             })
-
             # Send Email
             mail.send()
             
