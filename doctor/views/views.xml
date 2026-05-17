@@ -14,13 +14,13 @@
 
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="doctor.action_window">
-      <field name="name">doctor window</field>
+      <field name="name">Doctor</field>
       <field name="res_model">doctor.doctor</field>
       <field name="view_mode">list,form</field>
     </record>
 
     <!-- Top menu item -->
-    <menuitem name="doctor" id="doctor.menu_root" action="doctor.action_window"/>
+    <menuitem name="Doctor" id="doctor.menu_root" action="doctor.action_window"/>
 
   </data>
 </odoo>
