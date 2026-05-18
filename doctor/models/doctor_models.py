@@ -8,6 +8,7 @@ class doctor(models.Model):
     _description = 'doctor.doctor'
 
     doctor_ref_No = fields.Char("Request Number", default='New', copy=False)
+    image_1920 = fields.Image(string="Profile Picture")
     name = fields.Char(required=True)
     middle_name = fields.Char()
     last_name = fields.Char(required=True)

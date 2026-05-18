@@ -26,6 +26,7 @@
       <field name="arch" type="xml">
         <form>
           <sheet>
+            <field name="image_1920" widget="image" class="oe_avatar"/>
             <div class="text-muted">Doctor Reference</div>
               <h2>
                 <field name="doctor_ref_No" readonly="1"/>
@@ -71,6 +72,7 @@
               </page>
             </notebook>
           </sheet>
+          <chatter reload_on_follower="True"/>
         </form>
       </field>
     </record>
