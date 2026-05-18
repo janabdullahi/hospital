@@ -7,6 +7,7 @@ class doctor(models.Model):
     _name = 'doctor.doctor'
     _description = 'doctor.doctor'
 
+    doctor_ref_No = fields.Char("Request Number", default='New', copy=False)
     name = fields.Char(required=True)
     middle_name = fields.Char()
     last_name = fields.Char(required=True)
@@ -44,3 +45,10 @@ class doctor(models.Model):
     emergency_contact = fields.Char("Contact Name", required=True)
     emergency_phone = fields.Char("Contact Phone", required=True)
     department_id = fields.Many2one('hospital.department')
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('doctor_ref_No', 'New') == 'New':
+                vals['doctor_ref_No'] = self.env['ir.sequence'].next_by_code('doctor.doctor') or 'New'
+        return super().create(vals_list)
