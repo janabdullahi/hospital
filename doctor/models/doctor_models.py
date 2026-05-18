@@ -43,3 +43,4 @@ class doctor(models.Model):
     private_email = fields.Char(string="Private Email")
     emergency_contact = fields.Char("Contact Name", required=True)
     emergency_phone = fields.Char("Contact Phone", required=True)
+    department_id = fields.Many2one('hospital.department')

@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-from . import doctor_models
+from . import doctor_models, department_models

@@ -44,6 +44,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/doctor_views.xml',
+        'views/department_views.xml',
     ],
 }
 
