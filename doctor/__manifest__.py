@@ -43,8 +43,14 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'report/doctor_report.xml',
         'views/doctor_views.xml',
         'data/ir_sequence_data.xml',
         'views/department_views.xml',
     ],
+    'assets': {
+    'web.report_assets_common': [
+        'doctor/static/src/css/doctor_report_design.css',
+    ],
+}
 }
