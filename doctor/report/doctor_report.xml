@@ -1,0 +1,86 @@
+<odoo>
+
+    <!-- Report Action -->
+    <record id="doctor_report" model="ir.actions.report">
+        <field name="name">doctor Report</field>
+        <field name="model">doctor.doctor</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">doctor.doctor_report_template</field>
+        <field name="binding_model_id" ref="model_doctor_doctor"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Template -->
+    <template id="doctor_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="report_page" width="100%">
+                        <div>
+                            <h1 class="report_title">
+                                Doctor Report
+                            </h1>
+                        </div>
+                        <div class="address">
+                            <span t-esc="doc.private_street or '&#160;'"/>
+                            <span t-esc="doc.private_street2 or '&#160;'"/>
+                            <span t-esc="doc.private_city or '&#160;'"/>
+                            <span t-esc="doc.private_state_id.name if doc.private_state_id else '&#160;'"/>
+                            <span t-esc="doc.private_zip or '&#160;'"/>
+                            <span t-esc="doc.private_country_id.name if doc.private_country_id else '&#160;'"/>
+                        </div>
+                        <div class="index_gmc">
+                            <div class="index">
+                                Index No. 
+                                <span t-field="doc.doctor_index_number"/>
+							</div>
+                            <div class="gmc">
+                                GMC No. 
+                                <span t-field="doc.gmc_ref_number"/>
+                            </div>
+                        </div>
+                        <table class="table table-bordered" width="100%">
+                            <tr>
+                                <td class="titles"> Name </td>
+                                <td class="values">
+                                    <span t-esc="doc.name"/>
+                                </td>
+                                <td class="titles"> Last Name </td>
+                                <td class="values">
+                                    <span t-esc="doc.last_name"/>
+                                </td>
+                            </tr>
+                            <tr>    
+                                <td class="titles"> Place of Birth </td>
+                                <td class="values">
+                                    <span t-esc="doc.place_of_birth"/>
+                                </td>
+                                <td class="titles"> Country of Birth </td>
+                                <td class="values">
+                                    <span t-field="doc.country_of_birth"/>
+                                </td>
+                            </tr>
+                            <tr>    
+                                <td class="titles"> Phone </td>
+                                <td class="values">
+                                    <span t-esc="doc.private_phone"/>
+                                </td>
+                                <td class="titles"> Email </td>
+                                <td class="values">
+                                    <span t-esc="doc.private_email"/>
+                                </td>
+                            </tr>
+                            <tr>    
+                                <td class="titles" colspan="2"> Department </td>
+                                <td class="values" colspan="2">
+                                    <span t-field="doc.department_id"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="page-break-after: always;"></div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

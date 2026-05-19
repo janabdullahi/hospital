@@ -1,0 +1,39 @@
+
+.report_title {
+    text-align: center;
+}
+
+.address {
+    display: block;
+}
+.address span {
+    display: block;
+}
+
+.index_gmc {
+    margin-top: 8%;
+    font-weight: bold;
+}
+
+.index {
+    float: right;
+}
+
+.gmc {
+    float: left;
+}
+
+.table {
+    text-align: center;
+    word-break:break-all;
+    vertical-align: middle;
+}
+
+.titles {
+    font-weight: bold;
+    width: 25%;
+}
+
+.values {
+    width: 25%;
+}
