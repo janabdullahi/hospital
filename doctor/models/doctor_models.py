@@ -2,10 +2,10 @@
 
 from odoo import models, fields, api
 
-
 class doctor(models.Model):
     _name = 'doctor.doctor'
     _description = 'doctor.doctor'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     doctor_ref_No = fields.Char("Request Number", default='New', copy=False)
     image_1920 = fields.Image(string="Profile Picture")
@@ -15,7 +15,6 @@ class doctor(models.Model):
     dob = fields.Date(string="Date of Birth", default=fields.Date.context_today, required=True)
     place_of_birth = fields.Char('Place of Birth', required=True)
     country_of_birth = fields.Many2one("res.country", string="Country of Birth", required=True)
-    image_1920 = fields.Image(string="Profile Picture")
     doctor_index_number = fields.Char('Doctor Index Number', required=True)
     gmc_ref_number = fields.Char('GMC Reference Number', required=True)
     nationality_id = fields.Many2one('res.country', string='Nationality', required=True)

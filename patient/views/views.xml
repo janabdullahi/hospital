@@ -25,10 +25,6 @@
       <field name="type">kanban</field>
       <field name="arch" type="xml">
         <kanban sample="1">
-          <field name="name"/>
-          <field name="last_name"/>
-          <field name="dob"/>
-          <field name="nhs_number"/>
           <templates>
               <t t-name="card">
                 <div class="text-truncate oe_kanban_global_click" width="100%">
