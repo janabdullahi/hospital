@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 class doctor(models.Model):
     _name = 'doctor.doctor'
@@ -53,3 +54,32 @@ class doctor(models.Model):
             if vals.get('doctor_ref_No', 'New') == 'New':
                 vals['doctor_ref_No'] = self.env['ir.sequence'].next_by_code('doctor.doctor') or 'New'
         return super().create(vals_list)
+    
+    @api.constrains('doctor_index_number','gmc_ref_number')
+    def _check_doctor_index_or_gmc(self):
+        # index format check
+        for rec in self:
+            if rec.doctor_index_number:
+                if not rec.doctor_index_number.isdigit() or len(rec.doctor_index_number) != 6:
+                    raise ValidationError("Doctor Index Number must be exactly 6 digits.")
+        # gmc format check
+        for rec in self:
+            if rec.gmc_ref_number:
+                if not rec.gmc_ref_number.isdigit() or len(rec.gmc_ref_number) != 7:
+                    raise ValidationError("Doctor GMC Number must be exactly 7 digits.")
+
+        # index duplicate check
+            duplicate_index = self.search([
+                ('doctor_index_number', '=', rec.doctor_index_number),
+                ('id', '!=', rec.id)
+            ])
+            if duplicate_index:
+                raise ValidationError("A doctor already exists with this Index number.")
+        
+        # gmc duplicate check
+            duplicate_gmc = self.search([
+                ('gmc_ref_number', '=', rec.gmc_ref_number),
+                ('id', '!=', rec.id)
+            ])
+            if duplicate_gmc:
+                raise ValidationError("A doctor already exists with this GMC number.")

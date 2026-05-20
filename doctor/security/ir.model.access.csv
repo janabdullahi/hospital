@@ -6,4 +6,4 @@ access_doctor_doctor,doctor.doctor,model_doctor_doctor,doctor.group_doctor_docto
 
 access_doctor_admin,doctor.admin,model_doctor_doctor,doctor.group_doctor_admin,1,1,1,1
 
-access_hospital_department,hospital.department,model_hospital_department,doctor.base.group_user,1,1,1,1
+access_hospital_department,hospital.department,model_hospital_department,doctor.group_doctor_admin,1,1,1,1

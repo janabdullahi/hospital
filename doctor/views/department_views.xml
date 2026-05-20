@@ -22,7 +22,7 @@
     </record>
 
     <!-- Top menu item -->
-    <menuitem id="department_menu" name="Department" action="hospital_department_action_window" parent="doctor_menu_root"/>
+    <menuitem id="department_menu" name="Department" action="hospital_department_action_window" parent="doctor_menu_root" groups="doctor.group_doctor_admin"/>
 
   </data>
 </odoo>
