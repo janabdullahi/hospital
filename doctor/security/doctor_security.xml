@@ -1,0 +1,29 @@
+<odoo>
+
+    <!-- Category -->
+    <record id="doctor_category" model="ir.module.category">
+        <field name="name">Doctor Management</field>
+    </record>
+
+    <!-- Normal User -->
+    <record id="group_doctor_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="doctor_category"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Doctor -->
+    <record id="group_doctor_doctor" model="res.groups">
+        <field name="name">Doctor</field>
+        <field name="category_id" ref="doctor_category"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Admin -->
+    <record id="group_doctor_admin" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="doctor_category"/>
+        <field name="implied_ids" eval="[(4, ref('group_doctor_doctor'))]"/>
+    </record>
+
+</odoo>
