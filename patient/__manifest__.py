@@ -37,7 +37,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'doctor'],
     'application': True,
     'installable': True,
 

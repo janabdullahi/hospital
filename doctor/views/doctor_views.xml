@@ -148,7 +148,7 @@
     </record>
 
     <!-- Top menu item -->
-    <menuitem name="Doctor" id="doctor_menu_root" action="doctor_action_window"/>
+    <menuitem name="Doctor" id="doctor_menu_root" action="doctor_action_window" groups="doctor.group_doctor_user,doctor.group_doctor_doctor,doctor.group_doctor_admin"/>
 
   </data>
 </odoo>
