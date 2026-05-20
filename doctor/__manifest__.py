@@ -42,6 +42,7 @@
 
     # always loaded
     'data': [
+        'security/doctor_security.xml',
         'security/ir.model.access.csv',
         'report/doctor_report.xml',
         'views/doctor_views.xml',

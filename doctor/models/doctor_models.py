@@ -9,6 +9,7 @@ class doctor(models.Model):
 
     doctor_ref_No = fields.Char("Request Number", default='New', copy=False)
     image_1920 = fields.Image(string="Profile Picture")
+    user_id = fields.Many2one('res.users', default=lambda self: self.env.user)
     name = fields.Char(required=True)
     middle_name = fields.Char()
     last_name = fields.Char(required=True)
