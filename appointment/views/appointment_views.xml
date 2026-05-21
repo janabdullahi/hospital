@@ -8,6 +8,8 @@
       <field name="arch" type="xml">
         <list>
           <field name="patient_id"/>
+          <field name="appointment_date"/>
+          <field name="slot_id"/>
         </list>
       </field>
     </record>
@@ -21,6 +23,8 @@
           <sheet>
             <group>
               <field name="patient_id" options="{'no_create': True, 'no_edit': True}"/>
+              <field name="appointment_date"/>
+              <field name="slot_id" options="{'no_create': True, 'no_edit': True}"/>
             </group>
           </sheet>
         </form>
