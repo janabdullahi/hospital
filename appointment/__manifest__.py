@@ -20,6 +20,7 @@ Long description of module's purpose
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'views/appointment_views.xml',
     ],
 }
 
