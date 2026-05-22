@@ -10,3 +10,5 @@ class appointment(models.Model):
     _description = 'appointment.appointment'
 
     patient_id = fields.Many2one('patient.patient', string='Patient Name', required=True)
+    appointment_date = fields.Date(string="Appointment Date", required=True)
+    slot_id = fields.Many2one('appointment.slot', string='Time Slot', required=True)

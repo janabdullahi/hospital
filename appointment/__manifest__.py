@@ -38,6 +38,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/appointment_views.xml',
+        'views/appointment_slot_views.xml',
     ],
 }
 
