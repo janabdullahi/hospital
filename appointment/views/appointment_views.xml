@@ -1,6 +1,27 @@
 <odoo>
   <data>
 
+
+    <!-- explicit search view definition -->
+    <record id="appointment_search_view" model="ir.ui.view">
+      <field name="name">appointment.search.view</field>
+      <field name="model">appointment.appointment</field>
+      <field name="type">search</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="appointment_date" string="Appointment Date mm/dd/yyyy"/>
+          <field name="patient_id" string="Patient Name"/>
+          <filter string="Today's Appointments" name="appointment_date_today" domain="[('appointment_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+          <separator/>
+          <filter string="Tomorrow's Appointments" name="appointment_date_tomorrow" domain="[('appointment_date', '=', (context_today() + datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"/>
+          <separator/>
+          <filter string="Past Appointments" name="appointment_date_past" domain="[('appointment_date', '&lt;', context_today().strftime('%Y-%m-%d'))]"/>
+          <separator/>
+        </search>
+      </field>
+    </record>
+
+
     <!-- explicit list view definition -->
     <record model="ir.ui.view" id="appointment_list">
       <field name="name">appointment list</field>
