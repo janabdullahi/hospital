@@ -9,10 +9,19 @@ class appointment(models.Model):
     _name = 'appointment.appointment'
     _description = 'appointment.appointment'
 
+    appointment_ref_No = fields.Char("Request Number", default='New', copy=False)
     patient_id = fields.Many2one('patient.patient', string='Patient Name', required=True)
     appointment_date = fields.Date(string="Appointment Date", required=True)
     slot_id = fields.Many2one('appointment.slot', string='Time Slot', required=True)
- 
+    
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('appointment_ref_No', 'New') == 'New':
+                vals['appointment_ref_No'] = self.env['ir.sequence'].next_by_code('appointment.appointment') or 'New'
+        return super().create(vals_list)
+
     @api.constrains('appointment_date', 'slot_id', 'patient_id')
     def _check_slot(self):
         for rec in self:
