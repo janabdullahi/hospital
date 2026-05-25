@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="1">
+
+        <!--  Sequences for appointment  -->
+        <record id="appointment_appointment_sequence" model="ir.sequence">
+            <field name="name">appointment system</field>
+            <field name="code">appointment.appointment</field>
+            <field name="prefix">App</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

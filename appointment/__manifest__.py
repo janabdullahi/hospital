@@ -37,6 +37,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
         'views/appointment_views.xml',
         'views/appointment_slot_views.xml',
     ],

@@ -28,6 +28,7 @@
       <field name="model">appointment.appointment</field>
       <field name="arch" type="xml">
         <list>
+          <field name="appointment_ref_No" string="Ref No."/>
           <field name="patient_id"/>
           <field name="appointment_date"/>
           <field name="slot_id"/>
@@ -42,6 +43,10 @@
       <field name="arch" type="xml">
         <form>
           <sheet>
+            <div class="text-muted">Appointment Reference</div>
+              <h2>
+                <field name="appointment_ref_No" readonly="1"/>
+              </h2>
             <group>
               <field name="patient_id" options="{'no_create': True, 'no_edit': True}"/>
               <field name="appointment_date"/>
