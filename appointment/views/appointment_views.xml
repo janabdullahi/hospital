@@ -48,9 +48,14 @@
                 <field name="appointment_ref_No" readonly="1"/>
               </h2>
             <group>
-              <field name="patient_id" options="{'no_create': True, 'no_edit': True}"/>
-              <field name="appointment_date"/>
-              <field name="slot_id" options="{'no_create': True, 'no_edit': True}"/>
+              <group>
+                <field name="patient_id" options="{'no_create': True, 'no_edit': True}"/>
+                <field name="appointment_date"/>
+                </group>
+                <group>
+                <field name="doctor_id" options="{'no_create': True, 'no_edit': True}"/>
+                <field name="slot_id" options="{'no_create': True, 'no_edit': True}"/>
+              </group>
             </group>
           </sheet>
         </form>

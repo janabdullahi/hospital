@@ -11,6 +11,7 @@ class appointment(models.Model):
 
     appointment_ref_No = fields.Char("Request Number", default='New', copy=False)
     patient_id = fields.Many2one('patient.patient', string='Patient Name', required=True)
+    doctor_id = fields.Many2one('doctor.doctor', string='Doctor Name', required=True)
     appointment_date = fields.Date(string="Appointment Date", required=True)
     slot_id = fields.Many2one('appointment.slot', string='Time Slot', required=True)
     
