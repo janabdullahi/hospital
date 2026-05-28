@@ -13,14 +13,22 @@
         validate booking rules.
 
         Main Features:
+        
         - Patient appointment booking
+
         - Time slot management
+        
         - Slot capacity control
+        
         - Prevent duplicate bookings
+        
         - Prevent past date and past time bookings
+        
         - Weekend booking restrictions
+        
         - Appointment scheduling and tracking
 
+        
         The module is designed to improve appointment handling,
         resource management, and booking efficiency.
         """,
