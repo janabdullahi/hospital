@@ -8,6 +8,7 @@ from datetime import date, datetime
 class appointment(models.Model):
     _name = 'appointment.appointment'
     _description = 'appointment.appointment'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     appointment_ref_No = fields.Char("Request Number", default='New', copy=False)
     patient_id = fields.Many2one('patient.patient', string='Patient Name', required=True)
