@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
-from odoo.exceptions import ValidationError
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError, UserError
 from datetime import date, datetime
 
 
@@ -15,7 +15,6 @@ class appointment(models.Model):
     doctor_id = fields.Many2one('doctor.doctor', string='Doctor Name', required=True)
     appointment_date = fields.Date(string="Appointment Date", required=True)
     slot_id = fields.Many2one('appointment.slot', string='Time Slot', required=True)
-    
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -24,7 +23,7 @@ class appointment(models.Model):
                 vals['appointment_ref_No'] = self.env['ir.sequence'].next_by_code('appointment.appointment') or 'New'
         return super().create(vals_list)
 
-    @api.constrains('appointment_date', 'slot_id', 'patient_id')
+    @api.constrains('appointment_date', 'slot_id', 'patient_id', 'doctor_id')
     def _check_slot(self):
         for rec in self:
             # past dates
@@ -58,3 +57,10 @@ class appointment(models.Model):
                     raise ValidationError(
                         "You cannot book past time slots for today."
                     )
+            duplicate_doctor = self.search([
+                ('doctor_id', '=', rec.doctor_id.id),
+                ('appointment_date', '=', rec.appointment_date),
+                ('id', '!=', rec.id)
+            ])
+            if duplicate_doctor:
+                raise ValidationError("This doctor already has an appointment on this slot.")
