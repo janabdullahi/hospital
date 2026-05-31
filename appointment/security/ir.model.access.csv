@@ -1,3 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_appointment_appointment,appointment.appointment,model_appointment_appointment,base.group_user,1,1,1,1
+
+access_appointment_user,appointment.user,model_appointment_appointment,appointment.group_appointment_user,1,1,1,0
+
+access_appointment_doctor,appointment.doctor,model_appointment_appointment,appointment.group_appointment_doctor,1,1,0,0
+
+access_appointment_admin,appointment.admin,model_appointment_appointment,appointment.group_appointment_admin,1,1,1,1
+
 access_appointment_slot,appointment.slot,model_appointment_slot,base.group_user,1,1,1,1
