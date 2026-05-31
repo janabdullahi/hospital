@@ -1,0 +1,29 @@
+<odoo>
+
+    <!-- Category -->
+    <record id="appointment_category" model="ir.module.category">
+        <field name="name">Appointment Management</field>
+    </record>
+
+    <!-- Normal User -->
+    <record id="group_appointment_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="appointment_category"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Doctor -->
+    <record id="group_appointment_doctor" model="res.groups">
+        <field name="name">Doctor</field>
+        <field name="category_id" ref="appointment_category"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Admin -->
+    <record id="group_appointment_admin" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="appointment_category"/>
+        <field name="implied_ids" eval="[(4, ref('group_appointment_doctor'))]"/>
+    </record>
+
+</odoo>
