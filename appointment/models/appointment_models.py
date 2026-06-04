@@ -15,6 +15,20 @@ class appointment(models.Model):
     doctor_id = fields.Many2one('doctor.doctor', string='Doctor Name', required=True)
     appointment_date = fields.Date(string="Appointment Date", required=True)
     slot_id = fields.Many2one('appointment.slot', string='Time Slot', required=True)
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('confirmed', 'Confirmed'),
+        ('cancelled', 'Cancelled'),
+    ], string="Status", required=True, copy=False, default='draft')
+
+    def cancel(self):
+        for rec in self:
+            rec.state = 'cancelled'
+
+    def confirm(self):
+        for rec in self:
+            rec.state = 'confirmed'
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
