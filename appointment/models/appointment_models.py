@@ -24,10 +24,33 @@ class appointment(models.Model):
     def cancel(self):
         for rec in self:
             rec.state = 'cancelled'
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': 'Cancelled!',
+                'message': 'Appointment has been cancelled.',
+                'type': 'warning',  
+                'sticky': False,    
+                
+            }
+        }
+
 
     def confirm(self):
         for rec in self:
             rec.state = 'confirmed'
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': 'Confirmed!',
+                'message': 'Appointment has been confirmed successfully.',
+                'type': 'success',  
+                'sticky': False,    
+                
+            }
+        }
 
     @api.model_create_multi
     def create(self, vals_list):
