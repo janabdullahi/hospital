@@ -63,6 +63,33 @@
                 <field name="slot_id" options="{'no_create': True, 'no_edit': True}"/>
               </group>
             </group>
+            <notebook>
+              <page name="personal_information" string="Patient Information">
+                <group>
+                  <group string="Personal Info">
+                      <field name="last_name" readonly="1"/>
+                      <field name="dob" readonly="1"/>
+                      <field name="nhs_number" readonly="1"/>
+                      <field name="mrn_number" readonly="1"/>
+                      <field name="gender" readonly="1"/>
+                      <field name="country_of_birth" readonly="1" options="{'no_open': True}"/>
+                  </group>
+                  <group string="Contact Details">
+                    <field name="private_phone" readonly="1"/>
+                    <field name="private_email" readonly="1"/>
+                    <label for="private_street" string="Private Address"/>
+                      <div class="o_address_format">
+                        <field name="private_street" placeholder="Street..." class="o_address_street" readonly="1"/>
+                        <field name="private_street2" placeholder="Street 2..." class="o_address_street" readonly="1"/>
+                        <field name="private_city" placeholder="City" class="o_address_city"/>
+                        <field name="private_state_id" class="o_address_state" placeholder="State" readonly="1"/>
+                        <field name="private_zip" placeholder="ZIP" class="o_address_zip"  readonly="1"/>
+                        <field name="private_country_id" placeholder="Country" class="o_address_country" readonly="1" options="{'no_open': True}"/>
+                      </div>
+                  </group>
+                </group>
+              </page>
+            </notebook>
           </sheet>
           <chatter reload_on_follower="True"/>
         </form>

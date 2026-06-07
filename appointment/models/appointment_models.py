@@ -12,6 +12,27 @@ class appointment(models.Model):
 
     appointment_ref_No = fields.Char("Request Number", default='New', copy=False)
     patient_id = fields.Many2one('patient.patient', string='Patient Name', required=True)
+    last_name = fields.Char(related='patient_id.last_name', readonly=True)
+    dob = fields.Date(related='patient_id.dob', readonly=True)
+    place_of_birth = fields.Char(related='patient_id.place_of_birth', readonly=True)
+    country_of_birth = fields.Many2one("res.country", related='patient_id.country_of_birth', readonly=True)
+    nhs_number = fields.Char(related='patient_id.nhs_number', readonly=True)
+    mrn_number = fields.Char(related='patient_id.mrn_number', readonly=True)
+    gender = fields.Selection([
+        ('male', 'Male'),
+        ('female', 'Female'),
+        ('other', 'Other'),
+        ('unspecified', 'Unspecified'),
+        ], related='patient_id.gender', readonly=True)
+    private_street = fields.Char(related='patient_id.private_street', readonly=True)
+    private_street2 = fields.Char(related='patient_id.private_street2', readonly=True)
+    private_city = fields.Char(related='patient_id.private_city', readonly=True)
+    private_state_id = fields.Many2one("res.country.state", related='patient_id.private_state_id',
+        domain="[('country_id', '=?', private_country_id)]", readonly=True)
+    private_zip = fields.Char(related='patient_id.private_zip', readonly=True)
+    private_country_id = fields.Many2one("res.country", related="patient_id.private_country_id", readonly=True)
+    private_phone = fields.Char(related='patient_id.private_phone', readonly=True)
+    private_email = fields.Char(related='patient_id.private_email', readonly=True)
     doctor_id = fields.Many2one('doctor.doctor', string='Doctor Name', required=True)
     appointment_date = fields.Date(string="Appointment Date", required=True)
     slot_id = fields.Many2one('appointment.slot', string='Time Slot', required=True)
