@@ -33,7 +33,29 @@ class appointment(models.Model):
     private_country_id = fields.Many2one("res.country", related="patient_id.private_country_id", readonly=True)
     private_phone = fields.Char(related='patient_id.private_phone', readonly=True)
     private_email = fields.Char(related='patient_id.private_email', readonly=True)
+
     doctor_id = fields.Many2one('doctor.doctor', string='Doctor Name', required=True)
+    doctor_last_name = fields.Char(related='doctor_id.last_name', required=True)
+    doctor_dob = fields.Date(related='doctor_id.dob', required=True)
+    doctor_country_of_birth = fields.Many2one("res.country", related='doctor_id.country_of_birth', required=True)
+    doctor_index_number = fields.Char(related='doctor_id.doctor_index_number', required=True)
+    gmc_ref_number = fields.Char(related='doctor_id.gmc_ref_number', required=True)
+    doctor_gender = fields.Selection([
+        ('male', 'Male'),
+        ('female', 'Female'),
+        ('other', 'Other'),
+        ('unspecified', 'Unspecified'),
+        ], related='doctor_id.gender')
+    doctor_private_phone = fields.Char(related='doctor_id.private_phone', required=True)
+    doctor_private_email = fields.Char(related='doctor_id.private_email')
+    doctor_private_street = fields.Char(related='doctor_id.private_street')
+    doctor_private_street2 = fields.Char(related='doctor_id.private_street2')
+    doctor_private_city = fields.Char(related='doctor_id.private_city')
+    doctor_private_state_id = fields.Many2one(
+        "res.country.state", related='doctor_id.private_state_id',
+        domain="[('country_id', '=?', private_country_id)]",)
+    doctor_private_zip = fields.Char(related='doctor_id.private_zip')
+    doctor_private_country_id = fields.Many2one("res.country", related='doctor_id.private_country_id')
     appointment_date = fields.Date(string="Appointment Date", required=True)
     slot_id = fields.Many2one('appointment.slot', string='Time Slot', required=True)
     state = fields.Selection([

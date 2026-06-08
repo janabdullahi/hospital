@@ -69,10 +69,10 @@
                   <group string="Personal Info">
                       <field name="last_name" readonly="1"/>
                       <field name="dob" readonly="1"/>
+                      <field name="country_of_birth" readonly="1" options="{'no_open': True}"/>
                       <field name="nhs_number" readonly="1"/>
                       <field name="mrn_number" readonly="1"/>
                       <field name="gender" readonly="1"/>
-                      <field name="country_of_birth" readonly="1" options="{'no_open': True}"/>
                   </group>
                   <group string="Contact Details">
                     <field name="private_phone" readonly="1"/>
@@ -85,6 +85,32 @@
                         <field name="private_state_id" class="o_address_state" placeholder="State" readonly="1"/>
                         <field name="private_zip" placeholder="ZIP" class="o_address_zip"  readonly="1"/>
                         <field name="private_country_id" placeholder="Country" class="o_address_country" readonly="1" options="{'no_open': True}"/>
+                      </div>
+                  </group>
+                </group>
+              </page>
+
+              <page name="personal_information" string="Doctor Information">
+                <group>
+                  <group string="Personal Info">
+                      <field name="doctor_last_name" readonly="1"/>
+                      <field name="doctor_dob" readonly="1"/>
+                      <field name="doctor_country_of_birth" readonly="1" options="{'no_open': True}"/>
+                      <field name="doctor_index_number" readonly="1"/>
+                      <field name="gmc_ref_number" readonly="1"/>
+                      <field name="doctor_gender" readonly="1"/>
+                  </group>
+                  <group string="Contact Details">
+                    <field name="doctor_private_phone" readonly="1"/>
+                    <field name="doctor_private_email" readonly="1"/>
+                    <label for="private_street" string="Private Address"/>
+                      <div class="o_address_format">
+                        <field name="doctor_private_street" placeholder="Street..." class="o_address_street" readonly="1"/>
+                        <field name="doctor_private_street2" placeholder="Street 2..." class="o_address_street" readonly="1"/>
+                        <field name="doctor_private_city" placeholder="City" class="o_address_city"/>
+                        <field name="doctor_private_state_id" class="o_address_state" placeholder="State" readonly="1"/>
+                        <field name="doctor_private_zip" placeholder="ZIP" class="o_address_zip"  readonly="1"/>
+                        <field name="doctor_private_country_id" placeholder="Country" class="o_address_country" readonly="1" options="{'no_open': True}"/>
                       </div>
                   </group>
                 </group>
