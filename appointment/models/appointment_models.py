@@ -64,6 +64,17 @@ class appointment(models.Model):
         ('cancelled', 'Cancelled'),
     ], string="Status", required=True, copy=False, default='draft')
 
+    @api.onchange('slot_id')
+    def _onchange_slot_id(self):
+        if self.slot_id and not self.appointment_date:
+            self.slot_id = False
+            return {
+                'warning': {
+                    'title': 'Appointment Date Required',
+                    'message': 'Please select a date first before choosing a slot.',
+                }
+            }
+
     def cancel(self):
         for rec in self:
             rec.state = 'cancelled'
