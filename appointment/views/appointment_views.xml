@@ -39,6 +39,7 @@
           <field name="doctor_id"/>
           <field name="slot_id"/>
           <field name="appointment_date"/>
+          <field name="state" widget="badge" decoration-success="state == 'confirmed'" decoration-danger="state == 'cancelled'"/>
         </list>
       </field>
     </record>
