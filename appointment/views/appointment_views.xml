@@ -51,8 +51,8 @@
       <field name="arch" type="xml">
         <form>
           <header>
-            <button name="confirm" string="Confirm" type="object" class="btn-primary" invisible="state != 'draft'"/>
-            <button name="cancel" string="Cancel" type="object" class="btn-primary" invisible="state not in ['draft', 'confirmed']"  groups="appointment.group_appointment_admin,appointment.group_appointment_doctor"/>
+            <button name="confirm" string="Confirm" type="object" class="btn-primary" invisible="state != 'draft'  or not id"/>
+            <button name="cancel" string="Cancel" type="object" class="btn-primary" invisible="state not in ['draft', 'confirmed']  or not id"  groups="appointment.group_appointment_admin,appointment.group_appointment_doctor"/>
             <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,cancelled"/>
           </header>
           <sheet>
