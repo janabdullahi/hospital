@@ -51,7 +51,6 @@
       <field name="arch" type="xml">
         <form>
           <header>
-          <!-- Add this button in your appointment form view -->
             <button name="action_send_confirmation_request" string="Send Confirmation Request" type="object" class="btn-primary" invisible="state != 'draft'"/>
             <button name="confirm" string="Confirm" type="object" class="btn-primary" invisible="state != 'draft'  or not id"/>
             <button name="cancel" string="Cancel" type="object" class="btn-primary" invisible="state not in ['draft', 'confirmed']  or not id"  groups="appointment.group_appointment_admin,appointment.group_appointment_doctor"/>
