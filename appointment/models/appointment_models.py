@@ -3,6 +3,7 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError
 from datetime import date, datetime
+from markupsafe import Markup
 
 
 class appointment(models.Model):
@@ -105,6 +106,50 @@ class appointment(models.Model):
                 
             }
         }
+
+    def action_send_confirmation_request(self):
+        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+        confirm_url = '%s/appointment/confirm/%d' % (base_url, self.id)
+        reject_url = '%s/appointment/reject/%d' % (base_url, self.id)
+
+        mail = self.env['mail.mail'].create({
+            'subject': 'Appointment Confirmation Request',
+            'body_html': '''
+                <div style="font-family: Arial, sans-serif; font-size:14px;">
+                    <p>Dear <strong>%s</strong>,</p>
+                    <p>Please see your appointment details below:</p>
+                    <ul>
+                        <li><strong>Doctor:</strong> %s</li>
+                        <li><strong>Date:</strong> %s</li>
+                        <li><strong>Slot:</strong> %s</li>
+                    </ul>
+                    <p>Please confirm or reject your appointment:</p>
+                    <a href="%s" style="background-color:green; color:white; 
+                    padding:10px 20px; text-decoration:none; 
+                    border-radius:5px; margin-right:10px;">
+                    ✅ Confirm
+                    </a>
+                    <a href="%s" style="background-color:red; color:white; 
+                    padding:10px 20px; text-decoration:none; 
+                    border-radius:5px;">
+                    ❌ Reject
+                    </a>
+                    <br/><br/>
+                    <p>Kind regards,<br/>Hospital Management</p>
+                </div>
+            ''' % (
+                self.patient_id.name,
+                self.doctor_id.name,
+                self.appointment_date,
+                self.slot_id.name,
+                confirm_url,
+                reject_url,
+            ),
+            'email_to': self.patient_id.private_email,
+        })
+        mail.send()
+
+
 
     @api.model_create_multi
     def create(self, vals_list):
