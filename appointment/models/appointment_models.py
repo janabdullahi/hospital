@@ -108,10 +108,11 @@ class appointment(models.Model):
         }
 
     def action_send_confirmation_request(self):
+        if not self.patient_id.private_email:
+            raise ValidationError("Patient %s does not have an email address. Please add an email before sending confirmation." % self.patient_id.name)
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         confirm_url = '%s/appointment/confirm/%d' % (base_url, self.id)
         reject_url = '%s/appointment/reject/%d' % (base_url, self.id)
-
         mail = self.env['mail.mail'].create({
             'subject': 'Appointment Confirmation Request',
             'body_html': '''
