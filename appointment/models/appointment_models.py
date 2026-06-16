@@ -125,16 +125,8 @@ class appointment(models.Model):
                         <li><strong>Slot:</strong> %s</li>
                     </ul>
                     <p>Please confirm or reject your appointment:</p>
-                    <a href="%s" style="background-color:green; color:white; 
-                    padding:10px 20px; text-decoration:none; 
-                    border-radius:5px; margin-right:10px;">
-                    ✅ Confirm
-                    </a>
-                    <a href="%s" style="background-color:red; color:white; 
-                    padding:10px 20px; text-decoration:none; 
-                    border-radius:5px;">
-                    ❌ Reject
-                    </a>
+                    <a href="%s" style="background-color:green; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; margin-right:10px;">✅ Confirm </a>
+                    <a href="%s" style="background-color:red; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">❌ Reject </a>
                     <br/><br/>
                     <p>Kind regards,<br/>Hospital Management</p>
                 </div>
@@ -149,6 +141,31 @@ class appointment(models.Model):
             'email_to': self.patient_id.private_email,
         })
         mail.send()
+        self.message_post(
+        body=Markup("""
+            <div style="padding:10px; border-left:4px solid #3498db; background-color:#eaf4fb;">
+                <p style="margin:0 0 8px 0;"> <strong>Appointment Confirmation Sent</strong></p>
+                <ul style="margin:0; padding-left:20px;">
+                    <li><strong>Patient:</strong> %s</li>
+                    <li><strong>Email:</strong> %s</li>
+                    <li><strong>Doctor:</strong> %s</li>
+                    <li><strong>Date:</strong> %s</li>
+                    <li><strong>Slot:</strong> %s</li>
+                </ul>
+                <p style="margin:8px 0 0 0; color:gray; font-size:12px;">
+                    ⏳ Waiting for patient response...
+                </p>
+            </div>
+        """) % (
+            self.patient_id.name,
+            self.patient_id.private_email,
+            self.doctor_id.name,
+            self.appointment_date,
+            self.slot_id.name,
+        ),
+            message_type='comment',
+            subtype_xmlid='mail.mt_comment',
+        )
 
 
 
