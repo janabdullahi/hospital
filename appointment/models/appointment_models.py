@@ -34,7 +34,6 @@ class appointment(models.Model):
     private_country_id = fields.Many2one("res.country", related="patient_id.private_country_id", readonly=True)
     private_phone = fields.Char(related='patient_id.private_phone', readonly=True)
     private_email = fields.Char(related='patient_id.private_email', readonly=True)
-
     doctor_id = fields.Many2one('doctor.doctor', string='Doctor Name', required=True)
     doctor_last_name = fields.Char(related='doctor_id.last_name', required=True)
     doctor_dob = fields.Date(related='doctor_id.dob', required=True)
