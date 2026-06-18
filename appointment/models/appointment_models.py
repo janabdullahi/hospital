@@ -60,6 +60,7 @@ class appointment(models.Model):
     slot_id = fields.Many2one('appointment.slot', string='Time Slot', required=True)
     state = fields.Selection([
         ('draft', 'Draft'),
+        ('waiting', 'Waiting'),
         ('confirmed', 'Confirmed'),
         ('cancelled', 'Cancelled'),
     ], string="Status", required=True, copy=False, default='draft')
@@ -86,10 +87,12 @@ class appointment(models.Model):
                 'message': 'Appointment has been cancelled.',
                 'type': 'warning',  
                 'sticky': False,    
-                
             }
         }
 
+    def waiting(self):
+        for rec in self:
+            rec.state = 'waiting'
 
     def confirm(self):
         for rec in self:
@@ -101,8 +104,7 @@ class appointment(models.Model):
                 'title': 'Confirmed!',
                 'message': 'Appointment has been confirmed successfully.',
                 'type': 'success',  
-                'sticky': False,    
-                
+                'sticky': False,   
             }
         }
 
@@ -165,8 +167,7 @@ class appointment(models.Model):
             message_type='comment',
             subtype_xmlid='mail.mt_comment',
         )
-
-
+        self.waiting()
 
     @api.model_create_multi
     def create(self, vals_list):
