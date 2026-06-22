@@ -97,14 +97,47 @@ class appointment(models.Model):
     def confirm(self):
         for rec in self:
             rec.state = 'confirmed'
+            mail = self.env['mail.mail'].create({
+                'subject': 'Appointment Confirmed',
+                'body_html': '''
+                    <div style="font-family: Arial, sans-serif; font-size:14px;">
+                        <p>Dear <strong>%s</strong>,</p>
+                        <p>Your appointment has been <strong style="color:green;">confirmed</strong>. Please find the details below:</p>
+                        <ul>
+                            <li><strong>Doctor:</strong> %s</li>
+                            <li><strong>Date:</strong> %s</li>
+                            <li><strong>Slot:</strong> %s</li>
+                        </ul>
+                        <p>We look forward to seeing you.</p>
+                        <br/>
+                        <p>Kind regards,<br/>Hospital Management</p>
+                    </div>
+                ''' % (
+                    rec.patient_id.name,
+                    rec.doctor_id.name,
+                    rec.appointment_date,
+                    rec.slot_id.name,
+                ),
+                'email_to': rec.patient_id.private_email,
+            })
+            mail.send()
+            self.message_post(
+                body=Markup("<p>Appointment status updated: <strong style='color:green;'>Confirmed by patient ✅</strong></p>"),
+                message_type='comment',
+                subtype_xmlid='mail.mt_comment',
+            )
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params': {
                 'title': 'Confirmed!',
                 'message': 'Appointment has been confirmed successfully.',
-                'type': 'success',  
-                'sticky': False,   
+                'type': 'success',
+                'sticky': False,
+                'next': {
+                    'type': 'ir.actions.client',
+                    'tag': 'soft_reload',
+                },
             }
         }
 
