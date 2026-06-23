@@ -122,7 +122,7 @@ class appointment(models.Model):
             })
             mail.send()
             self.message_post(
-                body=Markup("<p>Appointment status updated: <strong style='color:green;'>Confirmed by patient ✅</strong></p>"),
+                body=Markup("<p>Appointment status updated: <strong style='color:green;'>Confirmed ✅</strong></p>"),
                 message_type='comment',
                 subtype_xmlid='mail.mt_comment',
             )
