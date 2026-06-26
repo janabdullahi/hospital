@@ -8,7 +8,7 @@ from markupsafe import Markup
 
 class appointment(models.Model):
     _name = 'appointment.appointment'
-    _description = 'appointment.appointment'
+    _description = 'Appointment record'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     appointment_ref_No = fields.Char("Request Number", default='New', copy=False)
