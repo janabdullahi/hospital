@@ -6,7 +6,7 @@ import base64
 
 class patient(models.Model):
     _name = 'patient.patient'
-    _description = 'patient.patient'
+    _description = 'Patient record'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'patient_ref_No desc'
 

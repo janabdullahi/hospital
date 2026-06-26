@@ -5,7 +5,7 @@ from odoo.exceptions import ValidationError
 
 class doctor(models.Model):
     _name = 'doctor.doctor'
-    _description = 'doctor.doctor'
+    _description = 'Doctor record'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     doctor_ref_No = fields.Char("Request Number", default='New', copy=False)
