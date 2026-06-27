@@ -10,6 +10,7 @@ class appointment(models.Model):
     _name = 'appointment.appointment'
     _description = 'Appointment record'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name = 'appointment_ref_No'
 
     appointment_ref_No = fields.Char("Request Number", default='New', copy=False)
     patient_id = fields.Many2one('patient.patient', string='Patient Name', required=True)
