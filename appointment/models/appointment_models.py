@@ -256,7 +256,8 @@ class appointment(models.Model):
             count = self.search_count([
             ('appointment_date', '=', rec.appointment_date),
             ('slot_id', '=', rec.slot_id.id),
-            ('id', '!=', rec.id)
+            ('id', '!=', rec.id),
+            ('state', '!=', 'cancelled'),
             ])
             if count >= rec.slot_id.capacity:
                 raise ValidationError(
@@ -265,7 +266,8 @@ class appointment(models.Model):
             duplicate_patient = self.search([
                 ('patient_id', '=', rec.patient_id.id),
                 ('appointment_date', '=', rec.appointment_date),
-                ('id', '!=', rec.id)
+                ('id', '!=', rec.id),
+                ('state', '!=', 'cancelled'),
             ])
             if duplicate_patient:
                 raise ValidationError("This patient already has an appointment on this day.")
@@ -280,7 +282,9 @@ class appointment(models.Model):
             duplicate_doctor = self.search([
                 ('doctor_id', '=', rec.doctor_id.id),
                 ('appointment_date', '=', rec.appointment_date),
-                ('id', '!=', rec.id)
+                ('slot_id', '=', rec.slot_id.id),
+                ('id', '!=', rec.id),
+                ('state', '!=', 'cancelled'),
             ])
             if duplicate_doctor:
                 raise ValidationError("This doctor already has an appointment on this slot.")
