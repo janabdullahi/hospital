@@ -98,7 +98,7 @@
               <group>
                   <field name="name"/>
                   <field name="last_name"/>
-                  <field name="dob" widget="badge"/>
+                  <field name="dob"/>
                   <field name="place_of_birth"/>
                   <field name="country_of_birth" options="{'no_create': True, 'no_edit': True}"/>
                 </group>
