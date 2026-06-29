@@ -16,7 +16,7 @@ class patient(models.Model):
     name = fields.Char(required=True)
     middle_name = fields.Char()
     last_name = fields.Char(required=True)
-    dob = fields.Date(string="Date of Birth", default=fields.Date.context_today, required=True)
+    dob = fields.Date(string="Date of Birth", required=True)
     place_of_birth = fields.Char('Place of Birth', required=True)
     country_of_birth = fields.Many2one("res.country", string="Country of Birth", required=True)
     nhs_number = fields.Char("NHS Number",required=True)
