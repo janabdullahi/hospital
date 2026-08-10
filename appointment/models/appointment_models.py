@@ -63,6 +63,7 @@ class appointment(models.Model):
         ('draft', 'Draft'),
         ('waiting', 'Waiting'),
         ('confirmed', 'Confirmed'),
+        ('done', 'Done'),
         ('cancelled', 'Cancelled'),
     ], string="Status", required=True, copy=False, default='draft')
 
@@ -127,6 +128,10 @@ class appointment(models.Model):
     def waiting(self):
         for rec in self:
             rec.state = 'waiting'
+
+    def done(self):
+        for rec in self:
+            rec.state = 'done'
 
     def confirm(self):
         for rec in self:
