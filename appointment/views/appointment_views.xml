@@ -17,6 +17,8 @@
           <separator/>
           <filter string="Past Appointments" name="appointment_date_past" domain="[('appointment_date', '&lt;', context_today().strftime('%Y-%m-%d'))]"/>
           <separator/>
+          <filter string="Done" name="done" domain="[('state', '=', 'done')]"/>
+          <separator/>
           <filter string="Confirmed" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
           <separator/>
           <filter string="Cancelled" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
@@ -41,7 +43,7 @@
           <field name="doctor_id"/>
           <field name="slot_id"/>
           <field name="appointment_date"/>
-          <field name="state" widget="badge" decoration-success="state == 'confirmed'" decoration-danger="state == 'cancelled'" decoration-warning="state == 'waiting'"/>
+          <field name="state" widget="badge" decoration-info="state == 'confirmed'" decoration-danger="state == 'cancelled'" decoration-warning="state == 'waiting'" decoration-success="state == 'done'"/>
         </list>
       </field>
     </record>
@@ -55,8 +57,9 @@
           <header>
             <button name="action_send_confirmation_request" string="Send Confirmation Request" type="object" class="btn-primary" invisible="state != 'draft' or not id"/>
             <button name="confirm" string="Confirm" type="object" class="btn-primary" invisible="state != 'waiting'"/>
+            <button name="done" string="Done" type="object" class="btn-primary" invisible="state != 'confirmed'" groups="appointment.group_appointment_admin,appointment.group_appointment_doctor"/>
             <button name="cancel" string="Cancel" type="object" class="btn-primary" invisible="state not in ['waiting', 'confirmed']"  groups="appointment.group_appointment_admin,appointment.group_appointment_doctor"/>
-            <field name="state" widget="statusbar" statusbar_visible="draft,waiting,confirmed,cancelled"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,waiting,confirmed,done,cancelled"/>
           </header>
           <sheet>
             <div class="text-muted">Appointment Reference</div>
@@ -99,7 +102,6 @@
                   </group>
                 </group>
               </page>
-
               <page name="personal_information" string="Doctor Information">
                 <group>
                   <group string="Personal Info">
@@ -141,7 +143,6 @@
 
     <!-- Top menu item -->
     <menuitem name="Appointment" id="appointment.menu_root" action="appointment_action_window"/>
-
 
   </data>
 </odoo>
