@@ -129,10 +129,6 @@ class appointment(models.Model):
         for rec in self:
             rec.state = 'waiting'
 
-    def done(self):
-        for rec in self:
-            rec.state = 'done'
-
     def confirm(self):
         for rec in self:
             rec.state = 'confirmed'
@@ -180,6 +176,29 @@ class appointment(models.Model):
             }
         }
 
+    def done(self):
+        for rec in self:
+            rec.state = 'done'
+            rec.message_post(
+                body=Markup("<p>Appointment status updated: <strong style='color:#8e44ad;'>The appointment has been successfully completed. 🎉</strong></p>"),
+                message_type='comment',
+                subtype_xmlid='mail.mt_comment',
+            )
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': 'Done!',
+                'message': 'The appointment has been successfully completed.',
+                'type': 'success',
+                'sticky': False,
+                'next': {
+                    'type': 'ir.actions.client',
+                    'tag': 'soft_reload',
+                },
+            }
+        }
+    
     def action_send_confirmation_request(self):
         if not self.patient_id.private_email:
             raise ValidationError("Patient %s does not have an email address. Please add an email before sending confirmation." % self.patient_id.name)
