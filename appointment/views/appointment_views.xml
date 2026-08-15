@@ -59,7 +59,8 @@
             <button name="confirm" string="Confirm" type="object" class="btn-primary" invisible="state != 'waiting'"/>
             <button name="done" string="Done" type="object" class="btn-primary" invisible="state != 'confirmed'" groups="appointment.group_appointment_admin,appointment.group_appointment_doctor"/>
             <button name="cancel" string="Cancel" type="object" class="btn-primary" invisible="state not in ['waiting', 'confirmed']"  groups="appointment.group_appointment_admin,appointment.group_appointment_doctor"/>
-            <field name="state" widget="statusbar" statusbar_visible="draft,waiting,confirmed,done,cancelled"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,waiting,confirmed,done" invisible="state == 'cancelled'"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,waiting,confirmed,cancelled" invisible="state != 'cancelled'"/>
           </header>
           <sheet>
             <div class="text-muted">Appointment Reference</div>
