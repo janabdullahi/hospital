@@ -11,6 +11,8 @@
         <search>
           <field name="appointment_date" string="Appointment Date mm/dd/yyyy"/>
           <field name="patient_id" string="Patient Name"/>
+          <field name="doctor_id" string="Doctor Name"/>
+          <separator/>
           <filter string="Today's Appointments" name="appointment_date_today" domain="[('appointment_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
           <separator/>
           <filter string="Tomorrow's Appointments" name="appointment_date_tomorrow" domain="[('appointment_date', '=', (context_today() + datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"/>
