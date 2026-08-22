@@ -86,7 +86,7 @@
         <field name="arch" type="xml">
           <form>
             <header>
-              <button name="send_email" string="Send Report" type="object" class="btn-primary"/>
+              <button name="send_email" string="Send Report" type="object" class="btn-primary" invisible="not id"/>
             </header>
             <sheet>            
               <field name="image_1920" widget="image" class="oe_avatar"/>
